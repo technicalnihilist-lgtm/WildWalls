@@ -47,7 +47,9 @@ class WildViewModelFactory(private val container: AppContainer) : ViewModelProvi
         modelClass.isAssignableFrom(SettingsViewModel::class.java) -> SettingsViewModel(
             container.settingsStore,
             container.libraryRepository,
-            container.imageLoader
+            container.imageLoader,
+            container.wallpaperRepository,
+            container.imageClient
         ) as T
 
         modelClass.isAssignableFrom(CreditsViewModel::class.java) -> CreditsViewModel(

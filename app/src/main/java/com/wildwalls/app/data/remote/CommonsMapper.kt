@@ -66,9 +66,9 @@ object CommonsMapper {
         if (hints.isNotEmpty() && !matchesHints(title, categories, hints)) return null
         if (isNonPhotographic(title, categories)) return null
 
-        val imageUrl = info.url ?: return null
+        val imageUrl = normalizeUrl(info.url ?: return null)
         val pageUrl = info.descriptionUrl ?: return null
-        val thumb = info.thumbUrl?.takeIf { it.isNotBlank() } ?: imageUrl
+        val thumb = info.thumbUrl?.takeIf { it.isNotBlank() }?.let(::normalizeUrl) ?: imageUrl
 
         val artist = plainText(meta["Artist"]?.value)
             .ifBlank { plainText(meta["Credit"]?.value) }
@@ -96,6 +96,15 @@ object CommonsMapper {
             categories = categories.map { it.removePrefix("Category:") }.take(12)
         )
     }
+
+    /**
+     * Commons returns media URLs on `thumb.wikimedia.org` with utm tracking parameters.
+     * The canonical `upload.wikimedia.org` host resolves far more reliably on mobile networks,
+     * and the tracking parameters only fragment the image cache, so both are normalised away.
+     */
+    private fun normalizeUrl(raw: String): String =
+        raw.substringBefore('?')
+            .replace("https://thumb.wikimedia.org/", "https://upload.wikimedia.org/")
 
     private fun isUsable(info: CommonsImageInfo): Boolean {
         val mime = info.mime?.lowercase() ?: return false

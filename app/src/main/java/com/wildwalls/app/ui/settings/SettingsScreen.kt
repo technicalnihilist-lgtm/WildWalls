@@ -169,6 +169,15 @@ fun SettingsScreen(
                         subtitle = "Removes recent searches and recently viewed",
                         onClick = viewModel::clearSearchHistory
                     )
+                    HairlineDivider()
+                    ActionRow(
+                        icon = WildIcons.Download,
+                        title = "Test image loading",
+                        subtitle = state.imageTest.ifBlank {
+                            "Fetches one wallpaper to check the image host"
+                        },
+                        onClick = viewModel::testImageLoading
+                    )
                 }
             }
 

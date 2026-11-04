@@ -54,12 +54,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.wildwalls.app.data.wallpaper.WallpaperTarget
 import com.wildwalls.app.domain.model.LicensePolicy
 import com.wildwalls.app.ui.components.AttributionRow
 import com.wildwalls.app.ui.components.WildIcons
+import com.wildwalls.app.ui.components.WildImage
 import com.wildwalls.app.ui.components.EmptyState
 import com.wildwalls.app.ui.components.ErrorState
 import com.wildwalls.app.ui.components.LoadingState
@@ -149,13 +148,11 @@ fun DetailScreen(
                                     (wallpaper.aspectRatio * 0.9f).coerceIn(0.62f, 1.15f)
                                 )
                         ) {
-                            AsyncImage(
-                                model = ImageRequest.Builder(context)
-                                    .data(wallpaper.imageUrl)
-                                    .crossfade(true)
-                                    .build(),
+                            WildImage(
+                                wallpaper = wallpaper,
                                 contentDescription = wallpaper.title,
-                                contentScale = ContentScale.Crop,
+                                fullResolution = true,
+                                decodeWidth = 1440,
                                 modifier = Modifier.fillMaxSize()
                             )
                             Box(

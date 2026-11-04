@@ -21,6 +21,8 @@ import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,11 +30,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
-import androidx.compose.ui.platform.LocalContext
 import com.wildwalls.app.domain.model.Wallpaper
 import com.wildwalls.app.ui.theme.Accent
 import com.wildwalls.app.ui.theme.SurfaceSoft
@@ -53,20 +53,16 @@ fun WallpaperCard(
     isFavorite: Boolean = false,
     onToggleFavorite: (() -> Unit)? = null
 ) {
-    val context = LocalContext.current
     Box(
         modifier = modifier
             .clip(cardShape)
             .background(SurfaceSoft)
             .clickable(onClick = onClick)
     ) {
-        AsyncImage(
-            model = ImageRequest.Builder(context)
-                .data(wallpaper.thumbUrl)
-                .crossfade(true)
-                .build(),
+        WildImage(
+            wallpaper = wallpaper,
             contentDescription = wallpaper.title,
-            contentScale = ContentScale.Crop,
+            decodeWidth = 600,
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(wallpaper.aspectRatio.coerceIn(0.62f, 1.5f))
@@ -131,7 +127,6 @@ fun HeroWallpaperCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -140,13 +135,10 @@ fun HeroWallpaperCard(
             .background(SurfaceSoft)
             .clickable(onClick = onClick)
     ) {
-        AsyncImage(
-            model = ImageRequest.Builder(context)
-                .data(wallpaper.thumbUrl)
-                .crossfade(true)
-                .build(),
+        WildImage(
+            wallpaper = wallpaper,
             contentDescription = wallpaper.title,
-            contentScale = ContentScale.Crop,
+            decodeWidth = 1080,
             modifier = Modifier.fillMaxSize()
         )
         Box(
@@ -198,7 +190,6 @@ fun WideWallpaperCard(
     modifier: Modifier = Modifier,
     width: Int = 150
 ) {
-    val context = LocalContext.current
     Column(
         modifier = modifier
             .width(width.dp)
@@ -212,13 +203,10 @@ fun WideWallpaperCard(
                 .clip(cardShape)
                 .background(SurfaceSoft)
         ) {
-            AsyncImage(
-                model = ImageRequest.Builder(context)
-                    .data(wallpaper.thumbUrl)
-                    .crossfade(true)
-                    .build(),
+            WildImage(
+                wallpaper = wallpaper,
                 contentDescription = wallpaper.title,
-                contentScale = ContentScale.Crop,
+                decodeWidth = 480,
                 modifier = Modifier.fillMaxSize()
             )
         }
@@ -248,7 +236,6 @@ fun CategoryTile(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(18.dp))
@@ -256,15 +243,7 @@ fun CategoryTile(
             .clickable(onClick = onClick)
     ) {
         if (coverUrl != null) {
-            AsyncImage(
-                model = ImageRequest.Builder(context)
-                    .data(coverUrl)
-                    .crossfade(true)
-                    .build(),
-                contentDescription = name,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
-            )
+            CoverImage(url = coverUrl, contentDescription = name)
         }
         Box(
             modifier = Modifier
@@ -297,6 +276,25 @@ fun CategoryTile(
             )
         }
     }
+}
+
+/** Small cover photo for a category tile, loaded through the app's own Coil loader. */
+@Composable
+private fun CoverImage(url: String, contentDescription: String) {
+    val context = LocalContext.current
+    AsyncImage(
+        imageLoader = LocalWildImageLoader.current,
+        model = ImageRequest.Builder(context)
+            .data(url)
+            .crossfade(true)
+            .size(480)
+            .addHeader("User-Agent", "WildWalls/1.2 (Android wallpaper app; contact@wildwalls.app)")
+            .addHeader("Referer", "https://commons.wikimedia.org/")
+            .build(),
+        contentDescription = contentDescription,
+        contentScale = ContentScale.Crop,
+        modifier = Modifier.fillMaxSize()
+    )
 }
 
 /** Attribution strip reused by the detail screen and the credits screen. */

@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -50,11 +51,19 @@ class HomeViewModel(
     private var lastFreshAt = 0L
 
     init {
-        loadFresh()
-        loadFeatured()
-        loadTrending()
-        loadRecent()
-        loadDaily()
+        // Staggered on purpose: firing five heavy Commons queries in the same frame is what made
+        // the first seconds of the app stutter on low-end devices.
+        viewModelScope.launch {
+            loadFresh()
+            delay(150)
+            loadFeatured()
+            delay(150)
+            loadTrending()
+            delay(150)
+            loadRecent()
+            delay(150)
+            loadDaily()
+        }
     }
 
     fun refreshAll() {
