@@ -86,3 +86,17 @@ data/download   Streaming downloader      data/wallpaper  WallpaperManager integ
   Diego Delso (CC BY-SA 4.0), Kandukuru Nagarjun (CC BY 2.0), CautiousHabliut (CC BY 4.0),
   zoofanatic (CC BY 2.0), ImagePerson (CC BY 4.0), Bangerth (CC BY 4.0), Arbenllapashtica (CC BY 4.0),
   Remonhussain (CC BY-SA 4.0).
+
+---
+
+## ☕ Donate / Buy me a coffee
+
+**Coming soon** — our donation options are on the way.
+
+| Platform | Status |
+| --- | --- |
+| Paytm | Coming soon |
+| PayPal | Coming soon |
+| GPay (Google Pay) | Coming soon |
+
+If you like our work, you can support us with a donation. We are bringing this very soon — **coming soon**.
