@@ -1,4 +1,17 @@
+<h1 align="center">WildWalls</h1>
+<p align="center"><b>Wildlife, framed.</b><br/>
+A premium animal wallpaper app for Android — live photography from Wikimedia Commons,
+verified free licensing, and the photographer credited on every single image.</p>
 
+<p align="center">
+  <img src="screenshots/home.jpg" width="230"/>
+  <img src="screenshots/explore.jpg" width="230"/>
+  <img src="screenshots/detail.jpg" width="230"/>
+</p>
+<p align="center">
+  <img src="screenshots/downloads.jpg" width="230"/>
+  <img src="screenshots/settings.jpg" width="230"/>
+</p>
 
 ## ☕ Donate / Buy me a coffee
 
@@ -85,21 +98,6 @@ If you like our work, you can support us with a donation. We are bringing this v
 
 ---
 
-<h1 align="center">WildWalls</h1>
-<p align="center"><b>Wildlife, framed.</b><br/>
-A premium animal wallpaper app for Android — live photography from Wikimedia Commons,
-verified free licensing, and the photographer credited on every single image.</p>
-
-<p align="center">
-  <img src="screenshots/home.jpg" width="230"/>
-  <img src="screenshots/explore.jpg" width="230"/>
-  <img src="screenshots/detail.jpg" width="230"/>
-</p>
-<p align="center">
-  <img src="screenshots/downloads.jpg" width="230"/>
-  <img src="screenshots/settings.jpg" width="230"/>
-</p>
-
 ## Download
 
 The latest APK is on the [Releases](../../releases) page: **WildWalls 1.1.0** (10.5 MB, minSdk 24,
@@ -173,4 +171,5 @@ data/download   Streaming downloader      data/wallpaper  WallpaperManager integ
   Diego Delso (CC BY-SA 4.0), Kandukuru Nagarjun (CC BY 2.0), CautiousHabliut (CC BY 4.0),
   zoofanatic (CC BY 2.0), ImagePerson (CC BY 4.0), Bangerth (CC BY 4.0), Arbenllapashtica (CC BY 4.0),
   Remonhussain (CC BY-SA 4.0).
+
 
