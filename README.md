@@ -1,3 +1,5 @@
+
+
 ## ☕ Donate / Buy me a coffee
 
 **Coming soon** — our donation options are on the way.
@@ -171,3 +173,4 @@ data/download   Streaming downloader      data/wallpaper  WallpaperManager integ
   Diego Delso (CC BY-SA 4.0), Kandukuru Nagarjun (CC BY 2.0), CautiousHabliut (CC BY 4.0),
   zoofanatic (CC BY 2.0), ImagePerson (CC BY 4.0), Bangerth (CC BY 4.0), Arbenllapashtica (CC BY 4.0),
   Remonhussain (CC BY-SA 4.0).
+
